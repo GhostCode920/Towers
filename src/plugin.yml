@@ -1,0 +1,12 @@
+name: Towers
+author: GhostCode
+version: 1.0
+description: The Towers MiniGame
+main: dev.ghosty.towers.Towers
+commands:
+  tptoworld:
+    permission: admin
+  editgame:
+    permission: towers.admin
+  join:
+    description: Join a game of Towers
