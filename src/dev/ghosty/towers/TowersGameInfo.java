@@ -2,7 +2,7 @@ package dev.ghosty.towers;
 
 import javax.annotation.Nonnegative;
 
-import dev.ghostcode.gameapi.GameInfo;
+import dev.ghosty.gameapi.GameInfo;
 
 public final class TowersGameInfo implements GameInfo {
 

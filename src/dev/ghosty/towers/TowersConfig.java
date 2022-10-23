@@ -3,7 +3,7 @@ package dev.ghosty.towers;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
-import dev.ghostcode.gameapi.config.Config;
+import dev.ghosty.gameapi.config.Config;
 
 public final class TowersConfig {
 	
@@ -11,6 +11,7 @@ public final class TowersConfig {
 		Config config = Towers.getInstance().getConfiguration();
 		
 		gameConfig_maxPlayers = config.getInt("game-config.max-players");
+		gameConfig_mapName = config.getString("game-config.map-name");
 		gameConfig_firstTimer_minPlayers = config.getInt("game-config.first-timer.min-players");
 		gameConfig_firstTimer_seconds = config.getInt("game-config.first-timer.seconds");
 		gameConfig_fastTimer_minPlayers = config.getInt("game-config.fast-timer.min-players");
@@ -34,7 +35,7 @@ public final class TowersConfig {
 		locations_redsSpawn_pitch = config.getFloat("locations.reds-spawn.pitch");
 		
 		try {
-			goals_blockType = Material.valueOf("");
+			goals_blockType = Material.valueOf(config.getString("goals.block-type"));
 		}catch(Exception e) {
 			Bukkit.getConsoleSender().sendMessage("§cTowers: goals.block-type in config.yml is wrong. Please patch it. Disabling...");
 			e.printStackTrace();
@@ -50,7 +51,6 @@ public final class TowersConfig {
 		goals_redGoal_y = config.getInt("goals.red-goal.y");
 		goals_redGoal_z = config.getInt("goals.red-goal.z");
 		
-		//TODO Coming soon
 		buildHeightLimit = config.getInt("build-height-limit");
 		
 		numberOfInstances = config.getInt("number-of-instances");
@@ -71,6 +71,7 @@ public final class TowersConfig {
 		messages_diedPlayer = config.getString("messages.died-player");
 		messages_noBuild = config.getString("messages.no-build");
 		messages_score = config.getString("messages.score");
+		messages_buildHeightLimit = config.getString("messages.build-height-limit");
 		messages_countdownCancelled = config.getString("messages.countdown-cancelled");
 		messages_countdownMultiple = config.getString("messages.countdown-multiple");
 		messages_countdownOneSecond = config.getString("messages.countdown-one-second");
@@ -91,6 +92,7 @@ public final class TowersConfig {
 	}
 	
 	public static int gameConfig_maxPlayers;
+	public static String gameConfig_mapName;
 	public static int gameConfig_firstTimer_minPlayers;
 	public static int gameConfig_firstTimer_seconds;
 	public static int gameConfig_fastTimer_minPlayers;
@@ -122,8 +124,7 @@ public final class TowersConfig {
 	public static int goals_redGoal_x;
 	public static int goals_redGoal_y;
 	public static int goals_redGoal_z;
-	
-	//TODO Coming soon
+
 	public static int buildHeightLimit;
 	
 	public static int numberOfInstances;
@@ -144,6 +145,7 @@ public final class TowersConfig {
 	public static String messages_diedPlayer;
 	public static String messages_noBuild;
 	public static String messages_score;
+	public static String messages_buildHeightLimit;
 	public static String messages_countdownCancelled;
 	public static String messages_countdownMultiple;
 	public static String messages_countdownOneSecond;

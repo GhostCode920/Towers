@@ -1,0 +1,92 @@
+game-config:
+  max-players: 4
+  map-name: "Towers"
+  first-timer:
+    min-players: 2 # for 2 players, just put 3 here, so it isn't called
+    seconds: 60
+  fast-timer:
+    min-players: 4
+    seconds: 10
+
+
+locations:
+  waiting-spawn:
+    x: 0.5
+    y: 201.0
+    z: 0.5
+    yaw: 90.0
+    pitch: 0.0
+  spawn-protection-radius: 4 # nobody can break/place blocks in that radius (radius of the cube lol)
+  blues-spawn:
+    x: -83.5
+    y: 92.0
+    z: 0.5
+    yaw: -90.0
+    pitch: 0.0
+  reds-spawn:
+    x: 84.5
+    y: 92.0
+    z: 0.5
+    yaw: 90.0
+    pitch: 0.0
+
+goals:
+  block-type: ENDER_PORTAL_FRAME # all avaible blocks here: https://helpch.at/docs/1.8.8/org/bukkit/Material.html; Don't put an item or it won't work
+  check-radius: 1 # 0 = only the block, 1 = all blocks around (not above and under), 2 = all blocks around and all the blocks around the blocks...
+  no-block-radius: 3 # same as above but with all possible y
+  blue-goal: # The middle block of where the blues need to go to goal
+    x: 84
+    y: 100
+    z: 0
+  red-goal: # The middle block of where the reds need to go to goal
+    x: -84
+    y: 100
+    z: 0
+
+build-height-limit: 140
+
+number-of-instances: 1
+
+# this can be modified or totally deleted using the API included in the plugin
+bungeecord:
+  enabled: true
+  if-enabled:
+    return-server: lobby
+  else:
+    return-world: lobby
+
+
+
+messages:
+  prefix: "§c[Towers] "
+  join: "§a+ %name% §7(%online%/%max%)"
+  leave: "§c- %name% §7(%online%/%max%)"
+  leave-in-game: "%color%%name% §cdisconnected! He may rejoin later."
+  team-select: "§aYou joined the %color%%team% Team§a!"
+  no-game: "§cThere is no game avaible now. Please try later."
+  joining: "§bAdding you into a game..."
+  players-only: "§cThis command is reserved to players."
+  died-unknown: "%color%%name% §edied."
+  died-player: "%color%%name% §ewas killed by %killer%."
+  no-build: "§cYou cannot build here!"
+  score: "%color%%name% §escore a point! §9%bluepoints%§7-§c%redpoints%"
+  build-height-limit: "§cYou cannot build that high."
+  countdown-cancelled: "§cCountdown cancelled. Not enough players to start the game."
+  countdown-multiple: "§aStarting in §e§l%timer% seconds§a."
+  countdown-one-second: "§aStarting in §e§l1 second§a."
+  countdown-zero: "§2Game started! GLHF"
+teams: # it isn't recommanded to change teams color right now (example: from blue to yellow), because the armor color WON'T change. Thanks!
+  blue:
+    name: "Blue"
+    color: "§9"
+  red:
+    name: "Red"
+    color: "§c"
+scoreboard:
+  title: "§c§lTowers"
+  blue-points: "%color%%team% Points§7: §b%bluepoints%"
+  red-points: "%color%%team% Points§7: §b%redpoints%"
+  current-team: "§7Your team: %color%%team%"
+  kills: "§7Kills: §b%kills%"
+  deaths: "§7Deaths: §b%deaths%"
+  server-ip: "§bBy GhostCode#1832 (big ad)"

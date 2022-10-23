@@ -6,9 +6,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import dev.ghostcode.gameapi.Game;
-import dev.ghostcode.gameapi.GameInfo;
-import dev.ghostcode.gameapi.config.Config;
+import dev.ghosty.gameapi.Game;
+import dev.ghosty.gameapi.GameInfo;
+import dev.ghosty.gameapi.config.Config;
 import dev.ghosty.towers.api.DefaultTowersAPI;
 import dev.ghosty.towers.api.TowersAPI;
 import dev.ghosty.towers.data.PlayerData;
@@ -54,11 +54,12 @@ public class Towers extends JavaPlugin implements Game {
 	public void onEnable() {
 		super.onEnable();
 		
+		saveDefaultConfig();
 		TowersConfig.init();
 		PH = new TowersPlaceholder();
 		
 		for(int i = 0; i < getGameInfo().numberOfInstances(); i++)
-			games.add(new Instance("save", true));
+			games.add(new Instance(TowersConfig.gameConfig_mapName, true));
 		
 		Bukkit.getPluginManager().registerEvents(new GameEvents(), this);
 		
@@ -66,8 +67,6 @@ public class Towers extends JavaPlugin implements Game {
 		//getCommand("editgame").setExecutor(new EditGameCommand());
 		getCommand("join").setExecutor(new JoinCommand());
 	
-		saveDefaultConfig();
-		
 		if(TowersConfig.bungeecord_enabled)
 			getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 	}

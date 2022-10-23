@@ -11,11 +11,11 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar I need it #
 *.war
 *.nar
 *.ear
-*.zip
+# *.zip I need it too uwu #
 *.tar.gz
 *.rar
 

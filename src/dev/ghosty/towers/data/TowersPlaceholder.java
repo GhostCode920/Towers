@@ -3,7 +3,7 @@ package dev.ghosty.towers.data;
 import java.util.HashMap;
 import java.util.function.Function;
 
-import dev.ghostcode.gameapi.util.AbstractPlaceholder;
+import dev.ghosty.gameapi.util.AbstractPlaceholder;
 import dev.ghosty.towers.Towers;
 
 public final class TowersPlaceholder extends AbstractPlaceholder<PlayerData> {

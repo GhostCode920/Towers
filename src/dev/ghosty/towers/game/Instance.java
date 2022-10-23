@@ -1,5 +1,22 @@
 package dev.ghosty.towers.game;
 
+import static dev.ghosty.towers.TowersConfig.locations_bluesSpawn_pitch;
+import static dev.ghosty.towers.TowersConfig.locations_bluesSpawn_x;
+import static dev.ghosty.towers.TowersConfig.locations_bluesSpawn_y;
+import static dev.ghosty.towers.TowersConfig.locations_bluesSpawn_yaw;
+import static dev.ghosty.towers.TowersConfig.locations_bluesSpawn_z;
+import static dev.ghosty.towers.TowersConfig.locations_redsSpawn_pitch;
+import static dev.ghosty.towers.TowersConfig.locations_redsSpawn_x;
+import static dev.ghosty.towers.TowersConfig.locations_redsSpawn_y;
+import static dev.ghosty.towers.TowersConfig.locations_redsSpawn_yaw;
+import static dev.ghosty.towers.TowersConfig.locations_redsSpawn_z;
+import static dev.ghosty.towers.TowersConfig.locations_waitingSpawn_pitch;
+import static dev.ghosty.towers.TowersConfig.locations_waitingSpawn_x;
+import static dev.ghosty.towers.TowersConfig.locations_waitingSpawn_y;
+import static dev.ghosty.towers.TowersConfig.locations_waitingSpawn_yaw;
+import static dev.ghosty.towers.TowersConfig.locations_waitingSpawn_z;
+import static dev.ghosty.towers.TowersConfig.messages_prefix;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,15 +32,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import dev.ghostcode.gameapi.util.FileUtil;
-import dev.ghostcode.gameapi.util.ScoreHelper;
+import dev.ghosty.gameapi.util.FileUtil;
+import dev.ghosty.gameapi.util.ScoreHelper;
 import dev.ghosty.towers.Towers;
 import dev.ghosty.towers.data.PlayerData;
 import dev.ghosty.towers.data.Team;
 import lombok.Getter;
 import lombok.Setter;
-
-import static dev.ghosty.towers.TowersConfig.*;
 
 public final class Instance {
 	

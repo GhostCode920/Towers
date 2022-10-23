@@ -1,5 +1,29 @@
 package dev.ghosty.towers.game;
 
+import static dev.ghosty.towers.TowersConfig.goals_blueGoal_x;
+import static dev.ghosty.towers.TowersConfig.goals_blueGoal_y;
+import static dev.ghosty.towers.TowersConfig.goals_blueGoal_z;
+import static dev.ghosty.towers.TowersConfig.goals_checkRadius;
+import static dev.ghosty.towers.TowersConfig.goals_noBlockRadius;
+import static dev.ghosty.towers.TowersConfig.goals_redGoal_x;
+import static dev.ghosty.towers.TowersConfig.goals_redGoal_y;
+import static dev.ghosty.towers.TowersConfig.goals_redGoal_z;
+import static dev.ghosty.towers.TowersConfig.locations_bluesSpawn_x;
+import static dev.ghosty.towers.TowersConfig.locations_bluesSpawn_y;
+import static dev.ghosty.towers.TowersConfig.locations_bluesSpawn_z;
+import static dev.ghosty.towers.TowersConfig.locations_redsSpawn_x;
+import static dev.ghosty.towers.TowersConfig.locations_redsSpawn_y;
+import static dev.ghosty.towers.TowersConfig.locations_redsSpawn_z;
+import static dev.ghosty.towers.TowersConfig.locations_spawnProtectionRadius;
+import static dev.ghosty.towers.TowersConfig.messages_diedPlayer;
+import static dev.ghosty.towers.TowersConfig.messages_diedUnknown;
+import static dev.ghosty.towers.TowersConfig.messages_noBuild;
+import static dev.ghosty.towers.TowersConfig.messages_prefix;
+import static dev.ghosty.towers.TowersConfig.messages_score;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,15 +35,15 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import dev.ghostcode.gameapi.util.ScoreHelper;
+import dev.ghosty.gameapi.util.ScoreHelper;
 import dev.ghosty.towers.Towers;
+import dev.ghosty.towers.TowersConfig;
 import dev.ghosty.towers.data.PlayerData;
 import dev.ghosty.towers.data.Team;
-
-import static dev.ghosty.towers.TowersConfig.*;
 
 public final class GameEvents implements Listener {
 	
@@ -45,8 +69,8 @@ public final class GameEvents implements Listener {
 		if(i.getState().notInGame()) e.setCancelled(true);
 	}
 	
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onDeath(EntityDamageEvent e) {
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onDamageDeath(EntityDamageEvent e) {
 		if(!(e.getEntity() instanceof Player)) return;
 		Player player = (Player) e.getEntity();
 		Instance i = Towers.getInstance().getInstanceFrom(player);
@@ -58,6 +82,7 @@ public final class GameEvents implements Listener {
 		
 		e.setCancelled(true);
 		i.spawn(pd);
+		System.out.println("damage");
 		
 		String message = Towers.getPH().placehold(messages_diedUnknown, pd);
 		if(e instanceof EntityDamageByEntityEvent) {
@@ -72,6 +97,17 @@ public final class GameEvents implements Listener {
 		}
 		final String finalMessage = message;
 		i.forAll(p -> p.getPlayer().sendMessage(messages_prefix+finalMessage));
+	}
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onDeath(EntityDeathEvent e) {
+		if(!(e.getEntity() instanceof Player)) return;
+		Player player = (Player) e.getEntity();
+		Instance i = Towers.getInstance().getInstanceFrom(player);
+		if(i == null) return;
+		List<Material> mats = Arrays.asList(Material.LEATHER_BOOTS, Material.LEATHER_LEGGINGS, Material.LEATHER_CHESTPLATE, Material.LEATHER_HELMET);
+		e.getDrops().removeIf(m -> mats.contains(m.getType()));
+		i.spawn(i.getData(player));
+		System.out.println("death");
 	}
 	
 	@EventHandler(priority = EventPriority.LOW)
@@ -178,6 +214,19 @@ public final class GameEvents implements Listener {
 		if(xDiff > radius) return false;
 		if(zDiff > radius) return false;
 		return true;
+	}
+	
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onPlaceBlock(BlockPlaceEvent e) {
+		Player player = e.getPlayer();
+		Instance i = Towers.getInstance().getInstanceFrom(player);
+		if(i == null) return;
+		Team t = i.getData(player).getTeam();
+		if(t == Team.NOT_ASSIGNED) return;
+		if(e.getBlock().getLocation().getBlockY() > TowersConfig.buildHeightLimit) {
+			e.setCancelled(true);
+			player.sendMessage(TowersConfig.messages_buildHeightLimit);
+		}
 	}
 
 }
