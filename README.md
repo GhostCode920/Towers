@@ -22,4 +22,8 @@ You can break any block on the map, place any block, as long as it's not next to
 
 ## Other things
 
-If you have any feedback, suggestion or bugs, please contact me on my discord (it is on my profile) ^^
+A feedback, suggestion? You can contact me on discord `@ghosty920`
+
+A bug? [Create an issue](https://github.com/Ghosty920/Towers/issues/new)
+
+Need help with the plugin or want to contribute? Feel free to contact me and/or open a pull request :)
