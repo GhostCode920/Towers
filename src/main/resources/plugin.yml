@@ -1,0 +1,13 @@
+name: Towers
+author: Ghosty
+description: A minecraft mini-game
+version: '${project.version}'
+main: me.ghosty.towers.Towers
+load: STARTUP
+commands:
+  #  tptoworld:
+  #    permission: towers.admin
+  #  editgame:
+  #    permission: towers.admin
+  join:
+    description: Join a game of Towers
