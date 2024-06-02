@@ -8,7 +8,6 @@ game-config:
     min-players: 4
     seconds: 10
 
-
 locations:
   waiting-spawn:
     x: 0.5
@@ -55,8 +54,6 @@ bungeecord:
   else:
     return-world: lobby
 
-
-
 messages:
   prefix: "§c[Towers] "
   join: "§a+ %name% §7(%online%/%max%)"
@@ -75,6 +72,7 @@ messages:
   countdown-multiple: "§aStarting in §e§l%timer% seconds§a."
   countdown-one-second: "§aStarting in §e§l1 second§a."
   countdown-zero: "§2Game started! GLHF"
+
 teams: # it isn't recommended to change teams color right now (example: from blue to yellow), because the armor color will not change.
   blue:
     name: "Blue"
@@ -82,10 +80,11 @@ teams: # it isn't recommended to change teams color right now (example: from blu
   red:
     name: "Red"
     color: "§c"
+
 scoreboard:
   title: "§c§lTowers"
-  blue-points: "%color%%team% Points§7: §b%bluepoints%"
-  red-points: "%color%%team% Points§7: §b%redpoints%"
+  blue-points: "§9Blue Points§7: §b%bluepoints%"
+  red-points: "§cRed Points§7: §b%redpoints%"
   current-team: "§7Your team: %color%%team%"
   kills: "§7Kills: §b%kills%"
   deaths: "§7Deaths: §b%deaths%"

@@ -3,8 +3,10 @@ package me.ghosty.towers.features.game;
 import lombok.Getter;
 import lombok.Setter;
 import me.ghosty.towers.Towers;
+import me.ghosty.towers.features.config.TowersConfig;
 import me.ghosty.towers.features.data.PlayerData;
 import me.ghosty.towers.features.data.Team;
+import me.ghosty.towers.features.data.TowersPlaceholder;
 import me.ghosty.towers.utils.FileUtil;
 import me.ghosty.towers.utils.ScoreHelper;
 import org.bukkit.*;
@@ -226,17 +228,18 @@ public final class Instance {
 		p.getPlayer().setNoDamageTicks(40);
 	}
 	
-	// TODO: Add a way to edit this
+	// TODO: Add a list in config instead
 	public void setScoreboard() {
-		forAll(p -> {
-			ScoreHelper sb = ScoreHelper.createScore(p.getPlayer());
-			sb.setTitle("§cTowers");
-			sb.setSlot(9, Team.BLUE.getChatColor() + "Blue Points§7: §b" + bluePoints);
-			sb.setSlot(8, Team.RED.getChatColor() + "Red Points§7: §b" + redPoints);
+		TowersPlaceholder ph = Towers.getPlaceholder();
+		forAll(data -> {
+			ScoreHelper sb = ScoreHelper.createScore(data.getPlayer());
+			sb.setTitle(ph.placeholder(scoreboard_title, data));
+			sb.setSlot(9, ph.placeholder(scoreboard_bluePoints, data));
+			sb.setSlot(8, ph.placeholder(scoreboard_redPoints, data));
 			sb.setSlot(7, " ");
-			sb.setSlot(6, "§7Your team: " + p.getTeam().getChatColor() + p.getTeam().getName());
+			sb.setSlot(6, ph.placeholder(scoreboard_currentTeam, data));
 			sb.setSlot(5, " ");
-			sb.setSlot(4, "§bBy ghosty920");
+			sb.setSlot(4, ph.placeholder(scoreboard_serverIp, data));
 		});
 	}
 	
